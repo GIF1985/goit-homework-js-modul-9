@@ -29,13 +29,14 @@ form.addEventListener('submit', event => {
   event.preventDefault(); // Отменяем стандартное поведение формы при отправке, чтобы страница не перезагружалась
 
   // Получаем значения полей формы
-  const delay = Number(event.target.elements.delay.value); // задержка перед выполнением первого промиса
-  const step = Number(event.target.elements.step.value); // шаг увеличения задержки перед выполнением каждого следующего промиса
-  const amount = Number(event.target.elements.amount.value); // количество промисов для создания
+  const { delay, step, amount } = event.target.elements;
 
   // Создаем несколько промисов с заданными параметрами задержки и количеством
-  for (let i = 1; i <= amount; i += 1) {
-    createPromise(i, delay + step * (i - 1)) // Создаем промис с позицией и задержкой, увеличивающейся с каждой следующей позицией
+  for (let i = 1; i <= amount.value; i += 1) {
+    const position = i;
+    const currentDelay = Number(delay.value) + Number(step.value) * (i - 1);
+
+    createPromise(position, currentDelay) // Создаем промис с позицией и задержкой, увеличивающейся с каждой следующей позицией
       .then(({ position, delay }) => {
         // Если промис разрешен, выполняем следующие действия
         Notiflix.Notify.success(

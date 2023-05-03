@@ -41,6 +41,8 @@ startBtn.addEventListener('click', onStartBtnClick);
 function onStartBtnClick() {
   //   console.log('click');
   clearInterval(timeInterval); // Очищаем предыдущий интервал, чтобы не создавать конфликтов
+  startBtn.disabled = true; // Блокируем кнопку старта
+  datetimePicker.disabled = true; // Блокируем инпут
   timeInterval = setInterval(() => {
     // Запускаем новый интервал
     selectedMs -= 1000; // Вычитаем одну секунду из оставшегося времени
@@ -50,12 +52,20 @@ function onStartBtnClick() {
   }, 1000);
 }
 
+function addLeadingZero(number) {
+  return number < 0 ? `0${number}` : number.toString();
+}
+
 // Функция установки отображения оставшегося времени на странице
 function setDate(data) {
-  document.querySelector('[data-seconds]').innerText = data.seconds;
-  document.querySelector('[data-minutes]').innerText = data.minutes;
-  document.querySelector('[data-hours]').innerText = data.hours;
-  document.querySelector('[data-days]').innerText = data.days;
+  document.querySelector('[data-seconds]').innerText = addLeadingZero(
+    data.seconds
+  );
+  document.querySelector('[data-minutes]').innerText = addLeadingZero(
+    data.minutes
+  );
+  document.querySelector('[data-hours]').innerText = addLeadingZero(data.hours);
+  document.querySelector('[data-days]').innerText = addLeadingZero(data.days);
 }
 
 // Инициализация datetimePicker с опциями
@@ -78,7 +88,30 @@ function convertMs(ms) {
   // Оставшиеся секунды
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
-  return { days, hours, minutes, seconds };
+  if (ms <= 0) {
+    // Если таймер закончил работу
+    clearInterval(timeInterval); // Очищаем интервал
+    startBtn.disabled = false; // Разблокируем кнопку старта
+    datetimePicker.disabled = false; // Разблокируем datetimePicker
+    clearInterval(timeInterval); // останавливаем интервал
+    setDate({ days: 0, hours: 0, minutes: 0, seconds: 0 }); // устанавливаем отображение времени на 0
+  }
+
+  if (ms < 0) {
+    return {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    };
+  }
+
+  return {
+    days,
+    hours,
+    minutes,
+    seconds,
+  };
 }
 
 // Примеры использования функции convertMs
