@@ -18,13 +18,56 @@ img {
 }
 
 .button-list {
-  display: flex; /* Устанавливаем контейнеру flex-свойства */
-  justify-content: center; /* Выравниваем по горизонтали по центру */
-  align-items: center; /* Выравниваем по вертикали по центру */
-  height: 100vh; /* Устанавливаем высоту контейнера на всю высоту видимой области */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .button-list button {
-  margin: 0 10px; /* Добавляем отступ между кнопками */
-  padding: 20 40; /* Сделал дизайн кнопки как на видео примере */
+  margin: 0 10px;
+  padding: 20 30;
+}
+
+/* Стиль для поля выбора даты */
+#datetime-picker {
+  padding: 5px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Стиль для кнопок*/
+button[data-start],
+button[data-stop] {
+  padding: 7px 20px;
+  color: #111;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Стиль для таймера */
+.timer {
+  display: flex;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.timer .field {
+  margin: 0 10px;
+  text-align: center;
+}
+
+.timer .value {
+  display: block;
+  font-weight: bold;
+  font-size: 36px;
+  color: #888;
+}
+
+.timer .label {
+  font-size: 14px;
+  color: #888;
+  text-transform: uppercase;
 }
