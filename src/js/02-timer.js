@@ -58,6 +58,10 @@ function addLeadingZero(number) {
   return number < 10 ? `0${number}` : number.toString();
 }
 
+function addLeadingZero(value) {
+  return value.toString().padStart(2, '0');
+}
+
 // Функция установки отображения оставшегося времени на странице
 function setDate(data) {
   document.querySelector('[data-seconds]').innerText = addLeadingZero(
