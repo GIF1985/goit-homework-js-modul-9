@@ -45,15 +45,17 @@ function onStartBtnClick() {
   datetimePicker.disabled = true; // Блокируем инпут
   timeInterval = setInterval(() => {
     // Запускаем новый интервал
-    selectedMs -= 1000; // Вычитаем одну секунду из оставшегося времени
-    const diffMs = selectedMs - new Date().getTime(); // Вычисляем разницу во времени между выбранной датой и текущим временем
+    // selectedMs = selectedMs - (selectedMs % 100);
+    let diffMs = selectedMs - new Date().getTime(); // Вычисляем разницу во времени между выбранной датой и текущим временем
+    diffMs = diffMs - (diffMs % 1000);
     const diffObj = convertMs(diffMs); // Преобразуем разницу в объект с данными о времени
     setDate(diffObj); // Устанавливаем отображение оставшегося времени на странице
+    selectedMs -= 1; // Вычитаем одну секунду из оставшегося времени
   }, 1000);
 }
 
 function addLeadingZero(number) {
-  return number < 0 ? `0${number}` : number.toString();
+  return number < 10 ? `0${number}` : number.toString();
 }
 
 // Функция установки отображения оставшегося времени на странице
@@ -113,8 +115,3 @@ function convertMs(ms) {
     seconds,
   };
 }
-
-// Примеры использования функции convertMs
-console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-console.log(convertMs(24140000)); // {days: 0, hours: 6, minutes: 42, seconds: 20}
