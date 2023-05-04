@@ -55,7 +55,7 @@ function onStartBtnClick() {
 }
 
 function addLeadingZero(number) {
-  return number < 0 ? `0${number}` : number.toString();
+  return number < 10 ? `0${number}` : number.toString();
 }
 
 // Функция установки отображения оставшегося времени на странице
