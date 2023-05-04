@@ -55,19 +55,7 @@ function onStartBtnClick() {
 }
 
 function addLeadingZero(number) {
-  return number < 10 ? `0${number}` : number.toString();
-}
-
-// Функция установки отображения оставшегося времени на странице
-function setDate(data) {
-  document.querySelector('[data-seconds]').innerText = addLeadingZero(
-    data.seconds
-  );
-  document.querySelector('[data-minutes]').innerText = addLeadingZero(
-    data.minutes
-  );
-  document.querySelector('[data-hours]').innerText = addLeadingZero(data.hours);
-  document.querySelector('[data-days]').innerText = addLeadingZero(data.days);
+  return number < 0 ? `0${number}` : number.toString();
 }
 
 // Функция установки отображения оставшегося времени на странице
