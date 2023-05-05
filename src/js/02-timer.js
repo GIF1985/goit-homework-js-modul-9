@@ -95,22 +95,12 @@ function convertMs(ms) {
     clearInterval(timeInterval); // Очищаем интервал
     startBtn.disabled = false; // Разблокируем кнопку старта
     datetimePicker.disabled = false; // Разблокируем datetimePicker
-    clearInterval(timeInterval); // останавливаем интервал
     setDate({ days: 0, hours: 0, minutes: 0, seconds: 0 }); // устанавливаем отображение времени на 0
   }
 
   // function addLeadingZero(value) {
   //   return value.toString().padStart(2, '0');
   // }
-
-  if (ms < 0) {
-    return {
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-    };
-  }
 
   return {
     days,
